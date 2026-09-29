@@ -23,14 +23,14 @@
 * **AttritionValue:** Translated text strings into binary indicators for numerical aggregation:
   * `=IF([@Attrition]="Yes",1,0)`
 * **Categorical Mapping via XLOOKUP:** Leveraged the `Data Dictionary` reference sheet to decode standard categorical columns:
-  * *Education Name:* `=XLOOKUP($I2,'Data Dictionary'!$A$2:$A$6,'Data Dictionary'!$B$2:$B$6)`
-  * *Environment Satisfaction Name:* `=XLOOKUP($N2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$C$2:$C$5)`
-  * *Job Involvement Name:* `=XLOOKUP($R2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$D$2:$D$5)`
-  * *Job Satisfaction Name:* `=XLOOKUP($V2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$E$2:$E$5)`
-  * *Performance Rating Name:* `=XLOOKUP($AF2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$F$2:$F$5)`
-  * *Relationship Satisfaction Name:* `=XLOOKUP($AH2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$G$2:$G$5)`
-  * *Work Life Balance Name:* `=XLOOKUP($AN2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$H$2:$H$5)`
-* **Salary Hike Formatting:** Converted percentage points into true percentage data types using division:
+  * *EducationName:* `=XLOOKUP($I2,'Data Dictionary'!$A$2:$A$6,'Data Dictionary'!$B$2:$B$6)`
+  * *EnvironmentSatisfactionName:* `=XLOOKUP($N2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$C$2:$C$5)`
+  * *JobInvolvementName:* `=XLOOKUP($R2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$D$2:$D$5)`
+  * *JobSatisfactionName:* `=XLOOKUP($V2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$E$2:$E$5)`
+  * *PerformanceRatingName:* `=XLOOKUP($AF2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$F$2:$F$5)`
+  * *RelationshipSatisfactionName:* `=XLOOKUP($AH2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$G$2:$G$5)`
+  * *WorkLifeBalanceName:* `=XLOOKUP($AN2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$H$2:$H$5)`
+* **SalaryHike:** Converted percentage points into true percentage data types using division:
   * `=[@PercentSalaryHike]/100`
 
 ### Scope Optimization
