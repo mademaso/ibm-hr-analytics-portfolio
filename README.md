@@ -8,7 +8,7 @@
 
 An end-to-end HR analytics project investigating workforce attrition drivers using the IBM HR Analytics Employee Attrition and Performance dataset from Kaggle. This project uncovers critical turnover hotspots and provides actionable retention strategies through a multi-page interactive Tableau dashboard suite built on a cleaned Microsoft Excel data model.
 
-**[Explore Executive Overview Dashboard](https://public.tableau.com/views/executive-overview_17907030976820/HREmployeeDataOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)** | **[Explore Sales Reps Deep-Dive Dashboard](https://public.tableau.com/views/sales-representatives-deep-dive/SalesRepresentativesDeep-Dive?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)**
+**[Explore Executive Overview Dashboard](https://public.tableau.com/views/executive-overview_17907232274830/HREmployeeDataOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)** | **[Explore Sales Reps Deep-Dive Dashboard](https://public.tableau.com/views/sales-representatives-deep-dive/SalesRepresentativesDeep-Dive?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)**
 
 ---
 
