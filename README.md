@@ -17,20 +17,15 @@ You can explore the live, interactive dashboards on Tableau Public:
 
 ## Repository Structure
 
-ibm-hr-analytics-portfolio/
-│
-├── assets/
-│   └── ibm-logo.png                            # Project logo / branding element
-│
-├── dashboards/
-│   └── employee_data_cleaned.twbx              # Packaged Tableau workbook containing both dashboards
-│
-├── data/
-│   ├── ibm-hr-attrition-raw.csv                # Original, raw dataset
-│   └── ibm-hr-attrition-cleaned.xlsx           # Cleaned Excel dataset (XLOOKUPs & data dictionary)
-│
-├── NOTES.md                                    # Detailed project notes, formulas, and deep-dive methodology
-└── README.md
+* **`assets/`**
+  * `ibm-logo.png` - Project logo and branding element
+* **`dashboards/`**
+  * `employee_data_cleaned.twbx` - Packaged Tableau workbook containing both dashboards
+* **`data/`**
+  * `ibm-hr-attrition-raw.csv` - Original raw dataset from Kaggle
+  * `ibm-hr-attrition-cleaned.xlsx` - Cleaned Excel dataset including data dictionary and custom lookup transformations
+* **`NOTES.md`** - Detailed technical notes, Excel formulas, and analytical methodology
+* **`README.md`** - Project landing page and executive summary
 
 ---
 
