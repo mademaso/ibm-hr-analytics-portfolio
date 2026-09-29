@@ -4,7 +4,7 @@
   <img src="assets/ibm-logo.png" alt="IBM Logo" width="150"/>
 </p>
 
-**Author:** [Matteo De Maso](www.linkedin.com/in/mademaso) | [Contact Email](mailto:mademaso@outlook.com)
+**Author:** [Matteo De Maso](https://www.linkedin.com/in/mademaso) | [Contact Email](mailto:mademaso@outlook.com)
 
 An end-to-end HR analytics project investigating workforce attrition drivers using the IBM HR Analytics Employee Attrition and Performance dataset from Kaggle. This project uncovers critical turnover hotspots and provides actionable retention strategies through a multi-page interactive Tableau dashboard suite built on a cleaned Microsoft Excel data model.
 
