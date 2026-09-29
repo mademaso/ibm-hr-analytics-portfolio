@@ -9,8 +9,8 @@
 ## Part 1: Excel Notes & Data Integrity
 
 ### Initial Setup & Data Hygiene
-* Backed up the original raw CSV file.
-* Saved a copy of the dataset as an XLSX file, renamed to `IBM_HR_Employee_Data_Cleaned`.
+* Backed up the original raw CSV file, renamed to `ibm-hr-attrition-raw`.
+* Saved a copy of the dataset as an XLSX file, renamed to `ibm-hr-attrition-cleaned`.
 * Renamed the primary worksheet to `Employee Data` and formatted the data range as an official Excel table titled `tblEmployeeData`.
 * Scanned the dataset using Excel filters to verify data integrity and confirm no structural corruption or missing values.
 * Standardized each column into its correct data type.
