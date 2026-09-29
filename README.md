@@ -14,8 +14,8 @@ An end-to-end HR analytics project investigating workforce attrition drivers usi
 
 ## Tech Stack and Skills Demonstrated
 
-* **Data Engineering and Cleaning (Excel):** Built `tblEmployeeData` and a reference `tblDataDictionary` sheet. Utilized `IF` functions for binary aggregation flags (`AttritionValue = 1/0`), `XLOOKUP` formulas to map categorical codes into readable text names (such as job satisfaction and education levels), and converted percentage salary hikes. Cleaned scope by dropping zero-variance columns (`EmployeeCount`, `Over18`, `StandardHours`).
-* **Data Visualization and Business Intelligence (Tableau Public):** Developed a packaged workbook (`.twbx`) featuring calculated fields for `Attrition Rate` (`AVG([Attrition Value])`), `Headcount`, income brackets, and tenure brackets, alongside tailored decimal formatting.
+* **Data Engineering and Cleaning (Excel):** Built `tblEmployeeData` and a reference `tblDataDictionary` sheet. Utilized `IF` functions for binary aggregation flags, `XLOOKUP` formulas to map categorical codes into readable text names (such as job satisfaction and education levels), and converted percentage salary hikes. Cleaned scope by dropping zero-variance columns (`EmployeeCount`, `Over18`, `StandardHours`).
+* **Data Visualization and Business Intelligence (Tableau Public):** Developed a packaged workbook (`.twbx`) featuring calculated fields for `Attrition Rate`, `Headcount`, income brackets, and tenure brackets, alongside tailored decimal formatting.
 * **Domain Expertise:** HR Analytics, Workforce Planning, Root-Cause Attrition Analysis.
 
 ---
@@ -43,6 +43,6 @@ For a complete breakdown of data transformations, Excel formulas, and analytical
 
 ## Repository Structure
 
-* `dashboards/` - Packaged Tableau workbook (`employee_data_cleaned.twbx`)
-* `data/` - Original raw CSV dataset and finished cleaned Excel dataset (`ibm-hr-attrition-cleaned.xlsx`)
+* `dashboards/` - Packaged Tableau workbook (`ibm-hr-attrition-dashboards.twbx`)
+* `data/` - Original raw CSV dataset (`ibm-hr-attrition-raw.csv`) and finished cleaned Excel dataset (`ibm-hr-attrition-cleaned.xlsx`)
 * `NOTES.md` - Technical methodology, formulas, and data preparation documentation
