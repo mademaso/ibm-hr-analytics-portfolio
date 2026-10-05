@@ -1,130 +1,230 @@
-# IBM HR Analytics Project - Full Notes and Methodology
+# IBM HR Analytics Project - Notes & Methodology
 
-* **Dataset:** IBM HR Analytics Employee Attrition & Performance
-* **Source:** [Kaggle - IBM HR Analytics Attrition Dataset](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset)
-* **Project Overview:** Utilizing Excel and Tableau to clean a workforce dataset and discover underlying trends and drivers in employee attrition.
+**Dataset:** IBM HR Analytics Employee Attrition & Performance  
+**Source:** [Kaggle - IBM HR Analytics Attrition Dataset](https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset)
 
----
+## Project Overview
 
-## Part 1: Excel Notes & Data Integrity
-
-### Initial Setup & Data Hygiene
-* Backed up the original raw CSV file, renamed to `ibm-hr-attrition-raw`.
-* Saved a copy of the dataset as an XLSX file, renamed to `ibm-hr-attrition-cleaned`.
-* Renamed the primary worksheet to `Employee Data` and formatted the data range as an official Excel table titled `tblEmployeeData`.
-* Scanned the dataset using Excel filters to verify data integrity and confirm no structural corruption or missing values.
-* Standardized each column into its correct data type.
-
-### Data Dictionary & Metadata
-* Created a dedicated reference sheet titled `Data Dictionary` to translate unintuitive numeric codes and serve as a user guide.
-* Organized the reference sheet into an official table titled `tblDataDictionary`.
-
-### Calculated Fields & Transformations (Highlighted Yellow Headers)
-* **AttritionValue:** Translated text strings into binary indicators for numerical aggregation:
-  * `=IF([@Attrition]="Yes",1,0)`
-* **Categorical Mapping via XLOOKUP:** Leveraged the `Data Dictionary` reference sheet to decode standard categorical columns:
-  * *EducationName:* `=XLOOKUP($I2,'Data Dictionary'!$A$2:$A$6,'Data Dictionary'!$B$2:$B$6)`
-  * *EnvironmentSatisfactionName:* `=XLOOKUP($N2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$C$2:$C$5)`
-  * *JobInvolvementName:* `=XLOOKUP($R2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$D$2:$D$5)`
-  * *JobSatisfactionName:* `=XLOOKUP($V2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$E$2:$E$5)`
-  * *PerformanceRatingName:* `=XLOOKUP($AF2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$F$2:$F$5)`
-  * *RelationshipSatisfactionName:* `=XLOOKUP($AH2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$G$2:$G$5)`
-  * *WorkLifeBalanceName:* `=XLOOKUP($AN2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$H$2:$H$5)`
-* **SalaryHike:** Converted percentage points into true percentage data types using division:
-  * `=[@PercentSalaryHike]/100`
-
-### Scope Optimization
-* Identified and documented columns containing zero variance to be excluded from visualization phases:
-  * `EmployeeCount`
-  * `Over18`
-  * `StandardHours`
+This project uses Excel and Tableau to clean, organize, and analyze an employee workforce dataset. The goal was to identify patterns in employee attrition and investigate areas with notably high turnover.
 
 ---
 
-## Part 2: Tableau Preparation & Architecture
+## Part 1: Excel Data Preparation
 
-### Dataset Connection & Field Organization
-* Connected Tableau directly to the `Employee Data` sheet from the cleaned workbook.
-* Verified field titles and data types.
-* Hid redundant coded fields, zero-variance columns, and unnecessary financial metrics while retaining `Monthly Income` as the primary financial measure.
-* Saved the initial file format as a `.twb` file.
+### Initial Setup
 
-### Calculated Fields & Number Formatting
-* Created key analytical calculated fields:
-  * *Attrition Rate:* `AVG([Attrition Value])`
-  * *Headcount:* `COUNT([Employee Number])`
-  * *Monthly Income Brackets:* `IIF([Monthly Income]<2500,"Under $2.5K", IIF([Monthly Income]<=3500,"$2.5K - $3.5K","Over $3.5K"))`
-  * *Tenure Brackets:* `IIF([Years At Company]<1,"Under 1 Year",IIF([Years At Company]<=3,"1 Year - 3 Years","Over 3 Years"))`
-* Standardized number formatting across all fields:
-  * Currency, counts, and discrete corporate levels: 0 decimal places
-  * Time and distance metrics: 1 decimal place
-  * Percentages: 2 decimal places
+- Backed up the original CSV dataset.
+- Saved a copy as an Excel workbook for cleaning and analysis.
+- Renamed the primary worksheet to `Employee Data`.
+- Created an Excel table named `tblEmployeeData`.
+- Used Excel filters to review the dataset for missing values or obvious data issues.
+- Checked and adjusted column data types where needed.
 
-### Field References
-* **Dimensions List:** Attrition, Business Travel, Department, Education Field, Education Name, Environment Satisfaction Name, Gender, Job Involvement Name, Job Level, Job Role, Job Satisfaction Name, Marital Status, Monthly Income Brackets, Over Time, Performance Rating Name, Relationship Satisfaction Name, Stock Option Level, Tenure Brackets, Work Life Balance Name.
-* **Measures List:** Age, Attrition Rate, Distance From Home, Headcount, Monthly Income, Num Companies Worked, Salary Hike, Total Working Years, Training Times Last Year, Years At Company, Years In Current Role, Years Since Last Promotion, Years With Curr Manager, Employee Data (Count), Measure Values.
+### Data Dictionary
 
----
+Created a separate `Data Dictionary` worksheet to make several coded fields easier to understand and use in analysis.
 
-## Part 3: Dashboard Architecture & Findings
+Created an Excel table named `tblDataDictionary`.
 
-### Dashboard 1: Executive Overview (`HR Employee Data Overview`)
-* Serves as a macro-level executive summary for company-wide workforce health.
-* Features the corporate logo in the top left and is titled `HR Employee Data Overview`.
-* **Executive KPIs (Horizontal Layout):**
-  * Total Headcount: 1,470
-  * Overall Attrition Rate: 16.12%
-  * Average Monthly Income: $6,503
-  * Average Years at Company: 7.0 years
-* **Visualization 1 (Attrition by Department - Horizontal Bar):** Ranked in descending order of turnover:
-  * Sales: 20.63%
-  * Human Resources: 19.05%
-  * Research & Development: 13.84%
-* **Visualization 2 (Attrition by Job Role - Horizontal Bar):** Highlighting organizational turnover hotspots:
-  * Sales Representative: 39.76%
-  * Laboratory Technician: 23.94%
-  * Human Resources: 23.08%
-  * Sales Executive: 17.48%
-  * Research Scientist: 16.10%
-  * Manufacturing Director: 6.90%
-  * Healthcare Representative: 6.87%
-  * Manager: 4.90%
-  * Research Director: 2.50%
+The dictionary was used to translate coded values for:
 
-### Dashboard 2: Targeted Deep-Dive (`Sales Representatives Deep-Dive`)
-* Investigates the critical attrition drivers within the Sales Representative job role.
-* Maintains visual consistency with Dashboard 1, including the top-left logo and title `Sales Representatives Deep-Dive`.
-* **Sales-Specific KPIs (Horizontal Layout):**
-  * Sales Rep Headcount: 83
-  * Sales Rep Attrition Rate: 39.76%
-  * Average Monthly Income: $2,626
-  * Average Years at Company: 2.9 years
-* **Visualization 3 (Monthly Income Effect - Line Chart):** Attrition breakdown by income tiers:
-  * Under $2.5K: 48.72%
-  * $2.5K - $3.5K: 35.14%
-  * Over $3.5K: 14.29%
-* **Visualization 4 (Over Time Effect - Vertical Bar):** 
-  * Yes: 66.70%
-  * No: 28.81%
-* **Visualization 5 (Tenure Effect - Vertical Bar):** 
-  * Under 1 Year: 57.14%
-  * 1 Year - 3 Years: 43.64%
-  * Over 3 Years: 23.81%
+- Education
+- Environment Satisfaction
+- Job Involvement
+- Job Satisfaction
+- Performance Rating
+- Relationship Satisfaction
+- Work Life Balance
 
-* **Finalization:** Saved as a packaged `.twbx` workbook and published to Tableau Public.
+### Calculated Fields
+
+Created an `AttritionValue` column to convert the text values in the `Attrition` field into numbers that could be used for calculating attrition rates.
+
+Formula: `=IF([@Attrition]="Yes",1,0)`
+
+Used `XLOOKUP` formulas with the Data Dictionary to create readable versions of several coded fields.
+
+Examples:
+
+- `EducationName`: `=XLOOKUP($I2,'Data Dictionary'!$A$2:$A$6,'Data Dictionary'!$B$2:$B$6)`
+- `EnvironmentSatisfactionName`: `=XLOOKUP($N2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$C$2:$C$5)`
+- `JobInvolvementName`: `=XLOOKUP($R2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$D$2:$D$5)`
+- `JobSatisfactionName`: `=XLOOKUP($V2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$E$2:$E$5)`
+- `PerformanceRatingName`: `=XLOOKUP($AF2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$F$2:$F$5)`
+- `RelationshipSatisfactionName`: `=XLOOKUP($AH2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$G$2:$G$5)`
+- `WorkLifeBalanceName`: `=XLOOKUP($AN2,'Data Dictionary'!$A$2:$A$5,'Data Dictionary'!$H$2:$H$5)`
+
+Created a `SalaryHike` field by converting the `PercentSalaryHike` values into percentage format.
+
+Formula: `=[@PercentSalaryHike]/100`
+
+### Dataset Review
+
+Identified several columns with no variation across the dataset:
+
+- `EmployeeCount`
+- `Over18`
+- `StandardHours`
+
+These fields were not useful for the analysis and were excluded from the Tableau visualizations.
 
 ---
 
-## Part 4: Key Findings & Strategic Recommendations
+## Part 2: Tableau Preparation
 
-### Key Findings
-* Attrition is notably concentrated within the Sales and Human Resources departments.
-* The Sales Representative role displays an abnormally high attrition rate (39.76%), driving the need for targeted investigation:
-  * Sales representatives earn significantly lower average monthly incomes compared to the broader company average, revealing an inverse correlation between lower pay bands and high turnover.
-  * Sales representatives logging frequent overtime experience a substantially higher attrition rate (66.70%).
-  * Sales representatives have shorter average tenures than the general workforce, with strong correlations between early tenure brackets and turnover.
+The cleaned Excel workbook was connected to Tableau using the `Employee Data` worksheet as the data source.
 
-### Strategic Recommendations
-* **Targeted Compensation Review:** Conduct an immediate review of base pay structures for entry-to-mid level Sales Representatives. Adjusting compensation to market competitiveness may prove more cost-effective than continuous recruitment and onboarding churn.
-* **Workload and Overtime Audit:** Implement managerial workload reviews within the sales division to prevent chronic burnout and structural fatigue caused by excessive overtime.
-* **Retention and Onboarding Milestones:** Investigate why sales representatives who surpass the 3-year tenure mark anchor successfully within the organization, and build out proactive support systems for new hires during their first 1 to 2 years.
+### Field Preparation
+
+- Reviewed field names and data types.
+- Organized fields as dimensions or measures where appropriate.
+- Hid coded fields after creating readable versions.
+- Hid fields with no variation.
+- Hid financial fields that were not needed for the dashboards.
+- Kept `Monthly Income` as the primary financial measure.
+- Hid other fields that were not used in the final visualizations.
+
+### Calculated Fields
+
+Created several calculated fields in Tableau for the dashboards.
+
+**Attrition Rate:** `AVG([Attrition Value])`
+
+**Headcount:** `COUNT([Employee Number])`
+
+**Monthly Income Brackets:** `IIF([Monthly Income]<2500,"Under $2.5K", IIF([Monthly Income]<=3500,"$2.5K - $3.5K","Over $3.5K"))`
+
+**Tenure Brackets:** `IIF([Years At Company]<1,"Under 1 Year",IIF([Years At Company]<=3,"1 Year - 3 Years","Over 3 Years"))`
+
+### Number Formatting
+
+Formatted fields according to the type of information being displayed:
+
+- Currency and counts: 0 decimal places
+- Time and distance measures: 1 decimal place
+- Percentages: 2 decimal places
+
+---
+
+## Part 3: Dashboards
+
+### Dashboard 1: Executive Overview
+
+**Title:** `HR Employee Data Overview`
+
+The first dashboard provides an overview of workforce size, overall attrition, income, tenure, and attrition by department and job role.
+
+**Key Metrics**
+
+- Total headcount: 1,470
+- Overall attrition rate: 16.12%
+- Average monthly income: $6,503
+- Average years at company: 7.0
+
+**Attrition by Department**
+
+- Sales: 20.63%
+- Human Resources: 19.05%
+- Research & Development: 13.84%
+
+**Attrition by Job Role**
+
+- Sales Representative: 39.76%
+- Laboratory Technician: 23.94%
+- Human Resources: 23.08%
+- Sales Executive: 17.48%
+- Research Scientist: 16.10%
+- Manufacturing Director: 6.90%
+- Healthcare Representative: 6.87%
+- Manager: 4.90%
+- Research Director: 2.50%
+
+### Dashboard 2: Sales Representatives Deep-Dive
+
+**Title:** `Sales Representatives Deep-Dive`
+
+The second dashboard focuses on the Sales Representative role because it had the highest attrition rate in the dataset.
+
+**Key Metrics**
+
+- Sales Representative headcount: 83
+- Sales Representative attrition rate: 39.76%
+- Average monthly income: $2,626
+- Average years at company: 2.9
+
+**Attrition by Monthly Income**
+
+- Under $2.5K: 48.72%
+- $2.5K - $3.5K: 35.14%
+- Over $3.5K: 14.29%
+
+**Attrition by Overtime**
+
+- Overtime: Yes — 66.70%
+- Overtime: No — 28.81%
+
+**Attrition by Tenure**
+
+- Under 1 Year: 57.14%
+- 1 Year - 3 Years: 43.64%
+- Over 3 Years: 23.81%
+
+The dashboards were saved as a packaged Tableau workbook (`.twbx`) and published to Tableau Public.
+
+---
+
+## Part 4: Key Findings
+
+### Sales Representative Attrition
+
+Sales Representatives had the highest attrition rate among the job roles shown in the analysis at 39.76%, compared with an overall company attrition rate of 16.12%.
+
+### Monthly Income
+
+Sales Representatives had an average monthly income of $2,626 compared with $6,503 across the full dataset.
+
+Within the Sales Representative group, attrition was higher among employees in the lower monthly income brackets:
+
+- Under $2.5K: 48.72%
+- $2.5K - $3.5K: 35.14%
+- Over $3.5K: 14.29%
+
+This shows an association between lower monthly income and higher attrition in this group.
+
+### Overtime
+
+Sales Representatives who reported working overtime had a 66.70% attrition rate, compared with 28.81% for those who did not.
+
+This indicates that overtime is another area worth investigating when considering Sales Representative turnover.
+
+### Tenure
+
+Sales Representatives had an average tenure of 2.9 years.
+
+Attrition was highest among employees with shorter tenure:
+
+- Under 1 year: 57.14%
+- 1-3 years: 43.64%
+- Over 3 years: 23.81%
+
+The lower attrition rate among employees with more than three years at the company suggests that the early stages of employment may be an important period to examine.
+
+---
+
+## Part 5: Business Recommendations
+
+Based on the patterns identified in the analysis, several areas may warrant further investigation.
+
+### Compensation
+
+Review compensation for Sales Representatives to determine whether lower pay may be associated with turnover and whether adjustments could improve retention.
+
+### Workload and Overtime
+
+Review workload and overtime expectations for Sales Representatives to better understand whether extended working hours may be associated with turnover.
+
+### Early Tenure
+
+Investigate the experiences of Sales Representatives during their first several years with the organization and identify factors that may help employees remain with the company beyond the three-year mark.
+
+These recommendations are based on patterns in the dataset and are intended as areas for further investigation rather than definitive explanations for employee turnover.
