@@ -6,43 +6,94 @@
 
 **Author:** [Matteo De Maso](https://www.linkedin.com/in/mademaso) | [Contact Email](mailto:mademaso@outlook.com)
 
-An end-to-end HR analytics project investigating workforce attrition drivers using the IBM HR Analytics Employee Attrition and Performance dataset from Kaggle. This project uncovers critical turnover hotspots and provides actionable retention strategies through a multi-page interactive Tableau dashboard suite built on a cleaned Microsoft Excel data model.
+An independent HR analytics project using the IBM HR Analytics Employee Attrition and Performance dataset from Kaggle. The project uses **Excel** to clean and organize employee data and **Tableau Public** to explore patterns in employee attrition.
 
-**[Explore Executive Overview Dashboard](https://public.tableau.com/views/executive-overview_17907232274830/HREmployeeDataOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)** | **[Explore Sales Reps Deep-Dive Dashboard](https://public.tableau.com/views/sales-representatives-deep-dive/SalesRepresentativesDeep-Dive?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)**
-
----
-
-## Tech Stack and Skills Demonstrated
-
-* **Data Engineering and Cleaning (Excel):** Built `tblEmployeeData` and a reference `tblDataDictionary` sheet. Utilized `IF` functions for binary aggregation flags, `XLOOKUP` formulas to map categorical codes into readable text names (such as job satisfaction and education levels), and converted percentage salary hikes. Cleaned scope by dropping zero-variance columns (`EmployeeCount`, `Over18`, `StandardHours`).
-* **Data Visualization and Business Intelligence (Tableau Public):** Developed a packaged workbook (`.twbx`) featuring calculated fields for `Attrition Rate`, `Headcount`, income brackets, and tenure brackets, alongside tailored decimal formatting.
-* **Domain Expertise:** HR Analytics, Workforce Planning, Root-Cause Attrition Analysis.
+**[View Executive Overview Dashboard](https://public.tableau.com/views/executive-overview_17907232274830/HREmployeeDataOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)** | **[View Sales Representatives Deep-Dive](https://public.tableau.com/views/sales-representatives-deep-dive/SalesRepresentativesDeep-Dive?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)**
 
 ---
 
-## Key Findings and Business Recommendations
+## Project Overview
 
-* **The Sales Representative Crisis (39.76% Turnover):** While overall company attrition sits at 16.12% (across 1,470 records), Sales Representatives suffer from an abnormally high turnover rate of 39.76% compared to other roles like Laboratory Technicians (23.94%) and HR staff (23.08%).
-* **Income and Overtime Pressures:** Sales reps average a lower monthly income ($2,626 vs. $6,503 company average), and analysis reveals a direct income bracket correlation (48.72% attrition under $2.5K vs. 14.29% over $3.5K). Furthermore, mandatory overtime pushes sales rep attrition up to 66.7%.
-* **Critical Tenure Window:** Sales reps average only 2.9 years at the company, with severe drop-offs occurring early (57.14% attrition under 1 year; 43.64% between 1 and 3 years). Those who pass the 3-year mark stabilize significantly (23.81%).
-* **Strategic Recommendations:** Leadership should review compensation bands for sales representatives to determine if increasing base pay is more cost-effective than continuous recruitment turnover, audit workloads to prevent burnout from excessive overtime, and investigate retention factors for employees who stay past three years.
+The goal of this project was to practice using workforce data to identify patterns in employee attrition and explore potential areas for further investigation.
 
----
+The project included:
 
-## Dashboard Preview and Architecture
-
-### 1. Executive Overview Dashboard
-Designed for executive leadership to monitor macro-level workforce health. Features KPIs for total headcount (1,470), overall attrition rate (16.12%), average monthly income ($6,503), and average years at company (7.0), alongside department and job role breakdown charts.
-
-### 2. Sales Representatives Deep-Dive Dashboard
-A targeted investigation into sales rep dynamics. Features specialized KPIs (83 headcount, 39.76% attrition, $2,626 avg. income, 2.9 avg. tenure) supported by visual analytics on monthly income effects, overtime impact, and tenure brackets.
-
-For a complete breakdown of data transformations, Excel formulas, and analytical methodology, check out the full [Project Notes](NOTES.md).
+- Cleaning and organizing **1,470 employee records** in Excel
+- Creating a data dictionary to make coded fields easier to understand
+- Using Excel formulas such as `IF` and `XLOOKUP` to prepare the data
+- Building two interactive dashboards in Tableau Public
+- Exploring attrition by department, job role, monthly income, overtime, and tenure
+- Developing potential retention recommendations based on the findings
 
 ---
 
-## Repository Structure
+## Tools
 
-* `dashboards/` - Packaged Tableau workbook (`ibm-hr-attrition-dashboards.twbx`)
-* `data/` - Original raw CSV dataset (`ibm-hr-attrition-raw.csv`) and finished cleaned Excel dataset (`ibm-hr-attrition-cleaned.xlsx`)
-* `NOTES.md` - Technical methodology, formulas, and data preparation documentation
+- **Microsoft Excel** — Data cleaning, organization, formulas, and data preparation
+- **Tableau Public** — Data visualization and interactive dashboards
+- **GitHub** — Project organization and documentation
+
+---
+
+## Key Findings
+
+### Overall Workforce
+
+- The dataset contains **1,470 employees**.
+- Overall attrition is **16.12%**.
+- Sales has the highest department-level attrition at **20.63%**.
+
+### Sales Representatives
+
+Sales Representatives had an attrition rate of **39.76%**, making the role a notable area for further investigation.
+
+The analysis found several patterns:
+
+- Sales Representatives with lower monthly income had higher attrition rates.
+- Sales Representatives working overtime had substantially higher attrition.
+- Attrition was highest among employees with shorter tenure.
+
+For example, attrition among Sales Representatives was **57.14% for employees with less than one year at the company**, compared with **23.81% among employees with more than three years**.
+
+These findings suggest areas that could be explored further, including compensation, workload, and early-career retention.
+
+---
+
+## Dashboards
+
+### 1. Executive Overview
+
+Provides a high-level view of the workforce, including:
+
+- Total headcount
+- Overall attrition rate
+- Average monthly income
+- Average years at the company
+- Attrition by department
+- Attrition by job role
+
+### 2. Sales Representatives Deep-Dive
+
+Focuses on the Sales Representative role and explores:
+
+- Attrition by monthly income bracket
+- Attrition by overtime status
+- Attrition by tenure
+
+---
+
+## Project Structure
+
+```text
+├── assets/
+│   └── ibm-logo.png
+│
+├── dashboards/
+│   └── ibm-hr-attrition-dashboards.twbx
+│
+├── data/
+│   ├── ibm-hr-attrition-raw.csv
+│   └── ibm-hr-attrition-cleaned.xlsx
+│
+├── README.md
+└── NOTES.md
